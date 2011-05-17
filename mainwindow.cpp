@@ -397,6 +397,8 @@ void MainWindow::addPOI(){
     QPair<QPixmap, QPoint> markerPair = makeStandardMarker(1, markerTxt, QPen(), QPen(QColor(Qt::white)), QBrush(QColor(Qt::darkCyan)));
 
     Poi *pix = new Poi(coor,markerPair.second,markerPair.first);
+    pix->setBriefDescription("The Poi name");
+    pix->setDescription("This is a test text");
 
     // TODO Warum geht das nicht?
 //    connect(pix, SIGNAL(selectedChanged(bool)), pix, SLOT(mySlot(bool)));

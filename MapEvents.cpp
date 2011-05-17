@@ -9,6 +9,7 @@
 
 QTM_USE_NAMESPACE
 
+class Poi;
 
 
 CircleAreaSelectWidget::CircleAreaSelectWidget(QGeoMappingManager *manager, const QGeoCoordinate& center)
@@ -44,7 +45,9 @@ void CircleAreaSelectWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
                     m_currentObj = objList[i];
                     qDebug() << "onClick Marker" << m_currentObj;
 
-                    InfoPoi *ip = new InfoPoi();                    
+                    Poi* p = dynamic_cast<Poi*>(m_currentObj);
+
+                    InfoPoi *ip = new InfoPoi(p);
                     if(ip){
                         ip->show();
                     }

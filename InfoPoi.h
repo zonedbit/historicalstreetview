@@ -1,6 +1,8 @@
 #ifndef INFOPOI_H
 #define INFOPOI_H
 
+#include "Poi.h"
+
 #include <QWidget>
 
 
@@ -15,6 +17,7 @@ class InfoPoi : public QWidget
 
 public:
     explicit InfoPoi(QWidget *parent = 0);
+    explicit InfoPoi(Poi* poi, QWidget *parent = 0);
     ~InfoPoi();
 
 private:
