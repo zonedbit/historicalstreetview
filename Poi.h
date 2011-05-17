@@ -2,6 +2,7 @@
 #define POI_H
 
 #include <QGeoMapPixmapObject>
+#include <QString>
 
 QTM_USE_NAMESPACE
 
@@ -12,8 +13,17 @@ public:
 
     ~Poi();
 
+    void setDescription( const QString& description);
+
+    const QString& getDescription(){return m_description;};
+
 public slots:
     virtual void mySlot();
+
+
+private:
+    QString m_description;
+
 
 };
 

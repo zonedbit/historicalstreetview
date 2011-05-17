@@ -20,4 +20,6 @@ void Poi::mySlot(){
     this->setVisible(true);
 }
 
-
+void Poi::setDescription(const QString& description){
+    this->m_description = description;
+}
