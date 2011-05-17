@@ -23,3 +23,7 @@ void Poi::mySlot(){
 void Poi::setDescription(const QString& description){
     this->m_description = description;
 }
+
+void Poi::setBriefDescription(const QString& briefDescription){
+    this->m_brief_description = briefDescription;
+}

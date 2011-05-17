@@ -14,8 +14,10 @@ public:
     ~Poi();
 
     void setDescription( const QString& description);
+    void setBriefDescription( const QString& briefDescription);
 
     const QString& getDescription(){return m_description;};
+    const QString& getBriefDescription(){return m_brief_description;};
 
 public slots:
     virtual void mySlot();
@@ -23,6 +25,7 @@ public slots:
 
 private:
     QString m_description;
+    QString m_brief_description;
 
 
 };
