@@ -17,7 +17,7 @@ class InfoPoi : public QWidget
 
 public:
     explicit InfoPoi(QWidget *parent = 0);
-    explicit InfoPoi(Poi* poi, QWidget *parent = 0);
+    explicit InfoPoi(const Poi* poi, QWidget *parent = 0);
     ~InfoPoi();
 
 private:

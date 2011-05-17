@@ -8,11 +8,10 @@ InfoPoi::InfoPoi(QWidget *parent) :
     ui->setupUi(this);
 }
 
-InfoPoi::InfoPoi(Poi* poi, QWidget *parent) :
+InfoPoi::InfoPoi(const Poi* poi, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::InfoPoi)
 {
-
     // Must be the first call
     ui->setupUi(this);
 
