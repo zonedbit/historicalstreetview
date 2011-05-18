@@ -24,7 +24,7 @@ InfoPoi::InfoPoi(const Poi* poi, QWidget *parent) :
     ui->description->setText(poi->getDescription());
 
     // Set the image to the ui
-    ui->image->setPixmap(QPixmap(":/default.png"));
+    ui->image->setPixmap(poi->getPoiImage());
 
 }
 

@@ -399,9 +399,7 @@ void MainWindow::addPOI(){
     Poi *pix = new Poi(coor,markerPair.second,markerPair.first);
     pix->setBriefDescription("The Poi name");
     pix->setDescription("This is a test text");
-
-    // TODO Warum geht das nicht?
-//    connect(pix, SIGNAL(selectedChanged(bool)), pix, SLOT(mySlot(bool)));
+    pix->setPoiImage(QPixmap(":/default.png"));
 
     // Marker zur Karte Setzen
     m_mapWidget->addMapObject(pix);

@@ -13,19 +13,38 @@ public:
 
     ~Poi();
 
-    void setDescription( const QString& description);
-    void setBriefDescription( const QString& briefDescription);
+		
+   /*-----------------------------------------------------------------------------
+    *  Setter
+    *-----------------------------------------------------------------------------*/
+    void setDescription      ( const QString& description);
+    void setBriefDescription ( const QString& briefDescription);
+    void setPoiImage         ( const QPixmap& poiImagent, int width=350, int height=350);
 
+    /*-----------------------------------------------------------------------------
+     *  Simple getter
+     *-----------------------------------------------------------------------------*/
     const QString& getDescription()      const {return m_description;};
     const QString& getBriefDescription() const {return m_brief_description;};
+    const QPixmap& getPoiImage()         const {return m_poi_image;};
 
 public slots:
     virtual void mySlot();
 
 
 private:
-    QString m_description;
-    QString m_brief_description;
+    QString m_description;        /*!< \brief long description of the POI */
+    QString m_brief_description;  /*!< \brief brief description of the POI
+                                              is used as the title for the window */
+																							used as the title for the window */
+
+    /*!
+     * \brief The photo of the poi
+     *
+     * \attention To scale the image to a proper size,
+     *            read access is necessary
+     */
+    QPixmap m_poi_image;
 
 
 };
