@@ -1,6 +1,8 @@
 #include "InfoPoi.h"
 #include "ui_InfoPoi.h"
 
+#include <QPicture>
+
 InfoPoi::InfoPoi(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::InfoPoi)
@@ -19,7 +21,11 @@ InfoPoi::InfoPoi(const Poi* poi, QWidget *parent) :
     this->setWindowTitle(poi->getBriefDescription());
 
     // Text in the description field
-    ui->textBrowser->setText(poi->getDescription());
+    ui->description->setText(poi->getDescription());
+
+    // Set the image to the ui
+    ui->image->setPixmap(QPixmap(":/default.png"));
+
 }
 
 InfoPoi::~InfoPoi()

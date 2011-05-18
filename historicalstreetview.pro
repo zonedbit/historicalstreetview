@@ -30,3 +30,6 @@ unix:!symbian {
 
 FORMS += \
     InfoPoi.ui
+
+RESOURCES += \
+    qtresources.qrc
