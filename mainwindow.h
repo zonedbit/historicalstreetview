@@ -77,7 +77,6 @@ private:
     void setupMap();
     void setupMenu();
     void setProvider(QString providerId);
-    QPair<QPixmap, QPoint> makeStandardMarker(int shapeType, const QString & text, const QPen & pen, const QPen & textPen, const QBrush & brush);
 
 private slots:
     void networkSessionOpened();
