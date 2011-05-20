@@ -24,8 +24,6 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 
-private:
-    QPair<QPixmap, QPoint> makeStandardMarker(int shapeType, const QString & text, const QPen & pen, const QPen & textPen, const QBrush & brush);
 
 signals:
      void areaChanged(const QGeoBoundingCircle& box);
