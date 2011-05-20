@@ -276,8 +276,6 @@ void MainWindow::sliderValueChanged(int zoomLevel)
 
 void MainWindow::mapZoomLevelChanged(qreal zoomLevel)
 {
-    qDebug() << "map zoomlevel changed: " + QString::number(zoomLevel);
-
     if(m_slider){
         m_slider->setSliderPosition(qRound(zoomLevel));
     }
@@ -288,18 +286,11 @@ void MainWindow::positionUpdated(QGeoPositionInfo geoPositionInfo)
 {
     if (geoPositionInfo.isValid())
     {
-        // We've got the position. No need to continue the listening.
-        locationDataSource->stopUpdates();
-
         // Save the position information into a member variable
         myPositionInfo = geoPositionInfo;
 
         // Get the current location as latitude and longitude
         QGeoCoordinate geoCoordinate = geoPositionInfo.coordinate();
-        qreal latitude = geoCoordinate.latitude();
-        qreal longitude = geoCoordinate.longitude();
-        qDebug() << "coordinate changed: " + QString("Latitude: %1 Longitude: %2").arg(latitude).arg(longitude);
-
         m_mapWidget->setCenter(geoCoordinate);
 
         if(m_myPositionMarker){
