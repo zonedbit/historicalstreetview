@@ -40,7 +40,7 @@
 ****************************************************************************/
 
 #include "mainwindow.h"
-#include "MapEvents.h"
+#include "MapWidget.h"
 #include "Poi.h"
 
 #include <QApplication>
@@ -57,9 +57,6 @@
 #include <QSvgRenderer>
 #include <QPainter>
 #include <QHBoxLayout>
-
-#include <stdio.h>
-#include <stdlib.h>
 
 
 QTM_USE_NAMESPACE
@@ -204,7 +201,7 @@ void MainWindow::setProvider(QString providerId)
 
 void MainWindow::setupMap()
 {
-    m_mapWidget = new CircleAreaSelectWidget(m_mapManager,QGeoCoordinate(51.5,7.5));
+    m_mapWidget = new MapWidget(m_mapManager,QGeoCoordinate(51.5,7.5));
     m_qgv->scene()->addItem(m_mapWidget);
     m_mapWidget->setZoomLevel(10);
 

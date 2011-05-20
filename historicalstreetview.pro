@@ -8,13 +8,13 @@ SOURCES += main.cpp \
            mainwindow.cpp \
     Poi.cpp \
     InfoPoi.cpp \
-    MapEvents.cpp
+    MapWidget.cpp
            
 HEADERS += \
            mainwindow.h \
     Poi.h \
     InfoPoi.h \
-    MapEvents.h
+    MapWidget.h
 
 CONFIG += mobility11
 MOBILITY = systeminfo location

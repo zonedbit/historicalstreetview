@@ -1,5 +1,5 @@
-#ifndef CIRCLEAREASELECTWIDGET_H
-#define CIRCLEAREASELECTWIDGET_H
+#ifndef MAPWIDGET_H
+#define MAPWIDGET_H
 
 #include <qgraphicsgeomap.h>
 #include <QGeoMapPixmapObject>
@@ -10,13 +10,13 @@
 
 QTM_USE_NAMESPACE
 
-class CircleAreaSelectWidget : public QGraphicsGeoMap
+class MapWidget : public QGraphicsGeoMap
 {
     Q_OBJECT
 public:
-    CircleAreaSelectWidget(QGeoMappingManager *manager, const QGeoCoordinate&  center);
+    MapWidget(QGeoMappingManager *manager, const QGeoCoordinate&  center);
 
-    ~CircleAreaSelectWidget();
+    ~MapWidget();
 public:
     void setCircle(const QGeoCoordinate& circleCenter,const qreal& radius);
 
@@ -41,4 +41,4 @@ private:
     QGeoAreaMonitor*        m_areaMonitor;
 };
 
-#endif // CIRCLEAREASELECTWIDGET_H
+#endif // MAPWIDGET_H

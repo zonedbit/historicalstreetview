@@ -1,4 +1,4 @@
-#include "MapEvents.h"
+#include "MapWidget.h"
 #include "InfoPoi.h"
 
 #include <QDebug>
@@ -12,7 +12,7 @@ QTM_USE_NAMESPACE
 class Poi;
 
 
-CircleAreaSelectWidget::CircleAreaSelectWidget(QGeoMappingManager *manager, const QGeoCoordinate& center)
+MapWidget::MapWidget(QGeoMappingManager *manager, const QGeoCoordinate& center)
 : QGraphicsGeoMap(manager),m_currentObj(0),m_areacircle(0),m_areaMonitor(0)
 {
     m_panActive = false;
@@ -21,13 +21,13 @@ CircleAreaSelectWidget::CircleAreaSelectWidget(QGeoMappingManager *manager, cons
 }
 
 
-CircleAreaSelectWidget::~CircleAreaSelectWidget() {
+MapWidget::~MapWidget() {
     delete m_areaMonitor;
 }
 
 
 
-void CircleAreaSelectWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
+void MapWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
     qDebug() << "void CircleAreaSelectWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)";
 
@@ -61,7 +61,7 @@ void CircleAreaSelectWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 }
 
 
-void CircleAreaSelectWidget::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
+void MapWidget::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
     if(!m_areaMonitor){
         if(m_currentObj){

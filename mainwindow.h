@@ -42,6 +42,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
 #include <qgeomappingmanager.h>
 
 #include <QMainWindow>
@@ -59,8 +60,9 @@
 class QResizeEvent;
 class QShowEvent;
 
+class MapWidget;
+
 QTM_USE_NAMESPACE
-class CircleAreaSelectWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -93,7 +95,7 @@ private slots:
 private:
     QGeoServiceProvider*        m_serviceProvider;
     QGeoMappingManager*         m_mapManager;
-    CircleAreaSelectWidget*     m_mapWidget;
+    MapWidget*                  m_mapWidget;
 
     QGraphicsView* m_qgv;
 
