@@ -273,6 +273,7 @@ void MainWindow::sliderValueChanged(int zoomLevel)
 
 void MainWindow::mapZoomLevelChanged(qreal zoomLevel)
 {
+    qDebug() << "mapZoomLevelChanged to: "  << zoomLevel;
     if(m_slider){
         m_slider->setSliderPosition(qRound(zoomLevel));
     }

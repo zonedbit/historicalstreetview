@@ -33,6 +33,7 @@ void MapWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
     setFocus();
     if (event->button() == Qt::LeftButton) {
+        qDebug() << "event->button() == Qt::LeftButton";
 
         // Wenn nicht kann die Karte nicht bewegt werden
         m_panActive = true;
@@ -40,7 +41,10 @@ void MapWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
             bool match = false;
             QList<QGeoMapObject*> objList = mapObjectsAtScreenPosition(event->pos());
+            qDebug() << "objList.count(): " << objList.count();
             for(int i=0; !match && i < objList.count(); i++){
+                qDebug() << "if(QGeoMapObject::PixmapType == objList[i]->type()";
+                qDebug() << "if(QGeoMapObject::PixmapType ==" << (QGeoMapObject::PixmapType == (objList[i]->type())) << ")";
                 if(QGeoMapObject::PixmapType == objList[i]->type()){
                     m_currentObj = objList[i];
                     qDebug() << "onClick Marker" << m_currentObj;
