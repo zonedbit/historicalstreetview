@@ -29,7 +29,7 @@ MapWidget::~MapWidget() {
 
 void MapWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
-    qDebug() << "void CircleAreaSelectWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)";
+    qDebug() << "void MapWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)";
 
     setFocus();
     if (event->button() == Qt::LeftButton) {
@@ -45,12 +45,8 @@ void MapWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
                     m_currentObj = objList[i];
                     qDebug() << "onClick Marker" << m_currentObj;
 
-                    Poi* p = dynamic_cast<Poi*>(m_currentObj);
-
-                    InfoPoi *ip = new InfoPoi(p);
-                    if(ip){
-                        ip->show();
-                    }
+//                    Poi* p = dynamic_cast<Poi*>(m_currentObj);
+                    m_currentObj->setSelected(true);
 
                     match = true;
                 }

@@ -303,12 +303,17 @@ void MainWindow::positionUpdated(QGeoPositionInfo geoPositionInfo)
 void MainWindow::addPOI(){
     qDebug()  << "void MainWindow::addPOI()" ;
 
+    static int cnt = 0;
+    ++cnt;
+    QString strCnt;
+    strCnt.setNum(cnt,10);
+
     // Koordinate fuer den Marker
     QGeoCoordinate coor(m_mapWidget->center());
 
 
     Poi *pix = new Poi(coor);
-    pix->setBriefDescription("The Poi name");
+    pix->setBriefDescription("The Poi " + strCnt);
     pix->setDescription("This is a test text");
     pix->setPoiImage(QPixmap(":/default.png"));
 

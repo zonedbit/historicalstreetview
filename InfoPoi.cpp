@@ -1,17 +1,18 @@
 #include "InfoPoi.h"
 #include "ui_InfoPoi.h"
 
+#include <QDebug>
 #include <QPicture>
 
-InfoPoi::InfoPoi(QWidget *parent) :
-    QWidget(parent),
+InfoPoi::InfoPoi(QDialog *parent) :
+    QDialog(parent),
     ui(new Ui::InfoPoi)
 {
     ui->setupUi(this);
 }
 
-InfoPoi::InfoPoi(const Poi* poi, QWidget *parent) :
-    QWidget(parent),
+InfoPoi::InfoPoi(const Poi* poi, QDialog *parent) :
+    QDialog(parent),
     ui(new Ui::InfoPoi)
 {
     // Must be the first call
@@ -30,5 +31,9 @@ InfoPoi::InfoPoi(const Poi* poi, QWidget *parent) :
 
 InfoPoi::~InfoPoi()
 {
-    delete ui;
+    qDebug()  << "InfoPoi::~InfoPoi()";
+
+    if(ui != 0){
+        delete ui;
+    }
 }

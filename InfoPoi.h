@@ -3,7 +3,7 @@
 
 #include "Poi.h"
 
-#include <QWidget>
+#include <QDialog>
 
 
 namespace Ui {
@@ -11,13 +11,13 @@ namespace Ui {
 }
 
 
-class InfoPoi : public QWidget
+class InfoPoi : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit InfoPoi(QWidget *parent = 0);
-    explicit InfoPoi(const Poi* poi, QWidget *parent = 0);
+    explicit InfoPoi(QDialog *parent = 0);
+    explicit InfoPoi(const Poi* poi, QDialog *parent = 0);
     ~InfoPoi();
 
 private:

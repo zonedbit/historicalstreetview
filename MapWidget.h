@@ -27,7 +27,6 @@ protected:
 
 signals:
      void areaChanged(const QGeoBoundingCircle& box);
-     void markerSelected(QGeoMapPixmapObject* pixmap);
 
 private:
     bool m_panActive;
