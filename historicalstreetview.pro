@@ -1,4 +1,5 @@
-QT += xml network svg
+QT += xml network svg core gui network script scriptTools
+
 TARGET = historicalstreetview
 TEMPLATE = app 
 INCLUDEPATH += ../../src/global \

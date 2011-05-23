@@ -82,7 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(sliderValueChanged(int)));
 
-    QHBoxLayout* layout = new QHBoxLayout();
+     QHBoxLayout* layout = new QHBoxLayout();
 
     layout->addWidget(m_slider);
     layout->addWidget(m_qgv);
@@ -104,12 +104,12 @@ MainWindow::MainWindow(QWidget *parent) :
         return;
     }
 
-
     //set callbacks and start internet connection
     m_session = new QNetworkSession(cfg, this);
     connect(m_session, SIGNAL(opened()), this, SLOT(networkSessionOpened()));
     connect(m_session,SIGNAL(error(QNetworkSession::SessionError)),this,SLOT(error(QNetworkSession::SessionError)));
     m_session->open();
+
 }
 
 
@@ -300,7 +300,14 @@ void MainWindow::positionUpdated(QGeoPositionInfo geoPositionInfo)
 }
 
 // Methode um die POI auf der Karte anzuzeigen
-void MainWindow::addPOI(){
+void MainWindow::addPOI()
+{
+
+    QUrl qurl;
+    qurl.setUrl("http://193.25.22.137:4713/HistMapServerREST/resources/imagebases/");
+    fetchJSON(qurl);
+
+
     qDebug()  << "void MainWindow::addPOI()" ;
 
     static int cnt = 0;
@@ -311,7 +318,7 @@ void MainWindow::addPOI(){
     // Koordinate fuer den Marker
     QGeoCoordinate coor(m_mapWidget->center());
 
-
+/*
     Poi *pix = new Poi(coor);
     pix->setBriefDescription("The Poi " + strCnt);
     pix->setDescription("This is a test text");
@@ -319,7 +326,87 @@ void MainWindow::addPOI(){
 
     // Marker zur Karte Setzen
     m_mapWidget->addMapObject(pix);
+    */
 
 
     return ;
+}
+
+void MainWindow::fetchJSON(QUrl url)
+{
+    if ( url.isValid() )
+    {
+       QNetworkAccessManager *_accessManager = new QNetworkAccessManager(this);
+       connect(_accessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+
+       _accessManager->get(QNetworkRequest(url));
+    }
+    else
+    {
+        qDebug() << "URL is not valid";
+    }
+
+    return ;
+}
+
+
+void MainWindow::replyFinished( QNetworkReply* reply )
+{
+    if ( reply->error() != QNetworkReply::NoError )
+    {
+        qDebug() << "Request failed, " << reply->errorString();
+        emit finished(false);
+        return;
+    }
+
+    qDebug() << "Request succeeded";
+    bool ok = processJSON( reply );
+    emit finished( ok );
+}
+
+bool MainWindow::processJSON( QNetworkReply* reply )
+{
+    QByteArray result = reply->readAll();
+
+    QScriptValue sc;
+    QScriptEngine engine;
+    sc = engine.evaluate("(" + QString(result) + ")");
+
+    if (sc.property("imagebase").isArray())
+    {
+        QScriptValueIterator it(sc.property("imagebase"));
+        while (it.hasNext())
+        {
+            it.next();
+
+            QString lons(it.value().property("longitude").toString().toStdString().c_str());
+            QString lats(it.value().property("latitude").toString().toStdString().c_str());
+
+            double lat = lats.toDouble();
+            double lon = lons.toDouble();
+
+            qDebug() << lat;
+            qDebug() << lon;
+
+            QGeoCoordinate coor(lat,
+                                lon
+                                );
+
+            Poi *pix = new Poi(coor);
+
+            qDebug() << it.value().property("id").toString().toStdString().c_str();
+            qDebug() << it.value().property("description").toString().toStdString().c_str();
+
+            pix->setBriefDescription(it.value().property("id").toString().toStdString().c_str());
+            pix->setDescription(it.value().property("description").toString().toStdString().c_str());
+            pix->setPoiImage(QPixmap(":/default.png"));
+
+            // Marker zur Karte Setzen
+            m_mapWidget->addMapObject(pix);
+
+
+        }
+    }
+
+    return true;
 }

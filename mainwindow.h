@@ -42,7 +42,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
 #include <qgeomappingmanager.h>
 
 #include <QMainWindow>
@@ -54,6 +53,17 @@
 #include <QGeoPositionInfoSource>
 #include <QPointer>
 #include <QSlider>
+
+#include <QUrl>
+#include <QtNetwork>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+#include <QByteArray>
+#include <QtScript/QScriptEngine>
+#include <QDebug>
+#include <QScriptValueIterator>
+
 
 
 
@@ -71,6 +81,9 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void fetchJSON(QUrl url);
+    bool processJSON(QNetworkReply* reply);
+
 protected:
     void resizeEvent(QResizeEvent* /*event*/);
     void showEvent(QShowEvent* /*event*/);
@@ -85,12 +98,17 @@ private slots:
     void error(QNetworkSession::SessionError error);
     void positionUpdated(QGeoPositionInfo geoPositionInfo);
     void startStopPositionMonitor();
+    void replyFinished(QNetworkReply* reply );
 
     void sliderValueChanged(int zoomLevel);
     void mapZoomLevelChanged(qreal zoomLevel);
     void hideShowZoom();
 
     void addPOI();
+
+
+signals:
+        void finished( bool success );
 
 private:
     QGeoServiceProvider*        m_serviceProvider;
