@@ -310,6 +310,7 @@ void MainWindow::addPOI()
 
     qDebug()  << "void MainWindow::addPOI()" ;
 
+    /*
     static int cnt = 0;
     ++cnt;
     QString strCnt;
@@ -318,7 +319,7 @@ void MainWindow::addPOI()
     // Koordinate fuer den Marker
     QGeoCoordinate coor(m_mapWidget->center());
 
-/*
+
     Poi *pix = new Poi(coor);
     pix->setBriefDescription("The Poi " + strCnt);
     pix->setDescription("This is a test text");
@@ -338,7 +339,6 @@ void MainWindow::fetchJSON(QUrl url)
     {
        QNetworkAccessManager *_accessManager = new QNetworkAccessManager(this);
        connect(_accessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
-
        _accessManager->get(QNetworkRequest(url));
     }
     else
@@ -399,7 +399,10 @@ bool MainWindow::processJSON( QNetworkReply* reply )
 
             pix->setBriefDescription(it.value().property("id").toString().toStdString().c_str());
             pix->setDescription(it.value().property("description").toString().toStdString().c_str());
+
             pix->setPoiImage(QPixmap(":/default.png"));
+
+            pix->setImageUrl(it.value().property("imageUrl").toString().toStdString().c_str());
 
             // Marker zur Karte Setzen
             m_mapWidget->addMapObject(pix);

@@ -177,3 +177,10 @@ QPair<QPixmap, QPoint> Poi::makeStandardMarker(const QPen & pen,
 
     return qMakePair(pixmap, offset);
 }
+
+void Poi::setImageUrl(const QString &url)
+{
+     m_image_url = url;
+}
+
+

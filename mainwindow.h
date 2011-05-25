@@ -123,6 +123,10 @@ private:
 
     QPointer<QGeoPositionInfoSource> locationDataSource;
     QGeoPositionInfo myPositionInfo;
+
+    //QHttp* m_Http;
+    QTemporaryFile m_TempFile;
+
 };
 
 #endif // MAINWINDOW_H

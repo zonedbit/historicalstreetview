@@ -31,6 +31,7 @@ public:
     void setDescription      ( const QString& description);
     void setBriefDescription ( const QString& briefDescription);
     void setPoiImage         ( const QPixmap& poiImagent, int width=350, int height=350);
+    void setImageUrl         ( const QString& url);
 
     /*-----------------------------------------------------------------------------
      *  Simple getter
@@ -38,6 +39,7 @@ public:
     const QString& getDescription()      const {return m_description;};
     const QString& getBriefDescription() const {return m_brief_description;};
     const QPixmap& getPoiImage()         const {return m_poi_image;};
+    const QString& getImageURL()         const {return m_image_url;};
 
 public slots:
     virtual void onSelection();
@@ -63,6 +65,8 @@ private:
      *            read access is necessary
      */
     QPixmap m_poi_image;
+    QString m_image_url;
+    QString foo;
 
 
     const QString m_svgTemplate;

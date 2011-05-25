@@ -4,7 +4,10 @@
 #include "Poi.h"
 
 #include <QDialog>
-
+#include <QBuffer>
+#include <QByteArray>
+#include <QHttp>
+#include <QDebug>
 
 namespace Ui {
     class InfoPoi;
@@ -21,7 +24,14 @@ public:
     ~InfoPoi();
 
 private:
+    QBuffer *buffer;
+    QByteArray bytes;
+    QHttp *http;
+    int request;
     Ui::InfoPoi *ui;
+
+private slots:
+    void finished(int code, bool error);
 };
 
 #endif // INFOPOI_H
