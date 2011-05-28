@@ -31,7 +31,7 @@ private:
     Ui::InfoPoi *ui;
 
 private slots:
-    void finished(int code, bool error);
+    void httpRequestFinished(int code, bool error);
 };
 
 #endif // INFOPOI_H

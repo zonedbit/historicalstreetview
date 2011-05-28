@@ -25,42 +25,51 @@ InfoPoi::InfoPoi(const Poi* poi, QDialog *parent) :
     ui->description->setText(poi->getDescription());
 
 
-
     QUrl url(poi->getImageURL());
-
     qDebug() << poi->getImageURL();
 
     http = new QHttp(this);
 
     qDebug() << "connect";
 
-    connect(http, SIGNAL(requestFinished(int, bool)),this, SLOT(finished(int, bool)));
-    buffer = new QBuffer(&bytes);
-    buffer->open(QIODevice::WriteOnly);
-    http->setHost(url.host());
-    request=http->get (url.path(),buffer);
+    http->setHost(url.host(), QHttp::ConnectionModeHttp, url.port() == -1 ? 0 : url.port());
+    connect(http, SIGNAL(requestFinished(int, bool)),this, SLOT(httpRequestFinished(int, bool)));
+    http->get(poi->getImageURL());
 
 }
 
-void InfoPoi::finished(int code, bool error)
+void InfoPoi::httpRequestFinished(int code, bool error)
 {
     qDebug() << "Image loaded";
-
     qDebug() << code;
+    qDebug() << request;
     qDebug() << error;
 
-    if(code == request)
+    qDebug() << "code == request";
+
+    QByteArray picture = http->readAll();
+
+    if(!error)
     {
-        qDebug() << "code == request";
+        if (!picture.isNull() && picture.size() > 0)
+        {
+            QImage image;
 
-        QImage img;
-
-        qDebug() << "isNull" + bytes.isNull();
-        qDebug() << "isEmpty" + bytes.isEmpty();
-        qDebug() << bytes;
-
-        img.loadFromData(bytes);
-        ui->image->setPixmap(QPixmap::fromImage(img));
+            if (image.loadFromData(picture))
+            {
+                QSize thumbnailSize = QSize(300, 300);
+                ui->image->setPixmap(QPixmap::fromImage(image.scaled(thumbnailSize, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+                ui->image->update();
+            }
+        }
+        else
+        {
+            qDebug() << "Picture is null or has no size";
+        }
+    }
+    else
+    {
+        qDebug() << "An error has occurend during the download of the image";
     }
 }
 
